@@ -1,6 +1,19 @@
-$newProcess = new-object System.Diagnostics.ProcessStartInfo "sysprep.exe" 
-$newProcess.WorkingDirectory = "${env:SystemDrive}\windows\system32\sysprep" 
-$newProcess.Arguments = "/generalize /oobe /shutdown" 
-Write-Host $newProcess.Arguments 
-$newProcess.Verb = "runas"; 
-$process = [System.Diagnostics.Process]::Start($newProcess);
+# This is a Chocolatey package installation task for Dev Box.
+
+$schema: 1.0
+name: sysprep
+description: Run sysprep script.
+author: Microsoft Corporation
+command: "./Sysprep.ps1"
+documentation:
+  notes: This task is used to install a Chocolatey package.
+  examples:
+    - name: choco
+      description: install OracleJDK 17.0.2
+      parameters:
+        package: oraclejdk
+        version: 17.0.2
+    - name: choco
+      description: install notepad++
+      parameters:
+        package: notepadplusplus
