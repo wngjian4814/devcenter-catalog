@@ -14,5 +14,5 @@ setupTasks:
     inputs:
       repositoryUrl: https://github.com/OrchardCMS/OrchardCore.git
       directory: C:\Workspaces
-    - task: generalize
-    - task: shutdown
+  - task: generalize
+  - task: shutdown
