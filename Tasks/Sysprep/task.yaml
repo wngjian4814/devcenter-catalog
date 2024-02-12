@@ -6,7 +6,7 @@ description: Run sysprep script.
 author: Microsoft Corporation
 command: "./Sysprep.ps1"
 documentation:
-  notes: This task is used to install a Chocolatey package.
+  notes: This task is used to sysprep.
   examples:
     - name: choco
       description: install OracleJDK 17.0.2
