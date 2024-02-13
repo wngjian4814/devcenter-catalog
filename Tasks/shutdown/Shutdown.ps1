@@ -1,3 +1,3 @@
 # Shut down the local computer forcefully
-Stop-Computer -ComputerName localhost -Force
+shutdown.exe /s /f
 Write-Host "Shutdown finished!"
