@@ -9,10 +9,7 @@ inputs:
     defaultValue: ""
     type: string
     required: true
-    description: |
-	@@ -15,24 +16,24 @@ inputs:
-      Visit https://chocolatey.org/packages to learn
-      more about Chocolatey packages. 
+    description: 
   version:
     defaultValue: ""
     type: string
