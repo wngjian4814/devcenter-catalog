@@ -27,10 +27,7 @@ inputs:
     defaultValue: ''
     type: string
     required: false
-    description: The PAT (personal access token) to use when cloning the repository.
-	@@ -35,14 +36,14 @@ documentation:
-    first user login.Otherwise the task will clone the repository during the
-    dev box provisioning stage.
+    description: 
   examples:
     - task: git-clone
       description: Clone this repository into C:\Workspaces
