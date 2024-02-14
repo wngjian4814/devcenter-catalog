@@ -1,18 +1,17 @@
 # This is a git repository cloning task for Dev Box
 
-$schema: 1.0
 name: git-clone
 description: Clones a git repository.
 author: Microsoft Corporation
 command: ./main.ps1 -RepositoryUrl {{ repositoryUrl }} -Directory {{ directory }} -Branch {{ branch }} -Pat {{ pat }}
-parameters:
+inputs:
   repositoryUrl:
-    default: ''
+    defaultValue: ''
     type: string
     required: true
     description: The URL of the repository to clone.
   directory:
-    default: C:\Workspaces
+    defaultValue: C:\Workspaces
     type: string
     required: false
     description: |
@@ -20,30 +19,27 @@ parameters:
       equivalent of the working directory under which the git command will
       execute.
   branch:
-    default: ''
+    defaultValue: ''
     type: string
     required: false
     description: The branch to clone.
   pat:
-    default: ''
+    defaultValue: ''
     type: string
     required: false
     description: The PAT (personal access token) to use when cloning the repository.
-documentation:
-  notes: |
-    This task allows you to clone a repository. When the "pat" parameter is
-    not specified, the task will queue the cloning operation to happen on the
+	@@ -35,14 +36,14 @@ documentation:
     first user login.Otherwise the task will clone the repository during the
     dev box provisioning stage.
   examples:
-    - name: git-clone
+    - task: git-clone
       description: Clone this repository into C:\Workspaces
-      parameters:
+      inputs:
         repositoryUrl: https://github.com/microsoft/calculator
         directory: C:\Workspaces
-    - name: git-clone
+    - task: git-clone
       description: Clone this repository's feature/winui2.6 branch into C:\Workspaces
-      parameters:
+      inputs:
         repositoryUrl: https://github.com/microsoft/calculator
         directory: C:\Workspaces
         branch: feature/winui2.6
