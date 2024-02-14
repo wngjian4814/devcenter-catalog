@@ -2,12 +2,16 @@ name: wngjianCustom
 image: microsoftwindowsdesktop_windows-ent-cpc_win11-22h2-ent-cpc-m365
 hostInformation: general_i_32c128gb2048ssd_v2
 supportsHibernation: false
-tasks:
-  - name: choco
-    parameters:
+setupTasks:
+  - task: winget
+    inputs:
+      configurationFile: C:\WinGetConfig\system.yaml
+      runAsUser: false
+  - task: choco
+    inputs:
       package: vscode
-  - name: git-clone
+  - task: git-clone
     description: Clone this repository into C:\Workspaces
-    parameters:
+    inputs:
       repositoryUrl: https://github.com/OrchardCMS/OrchardCore.git
       directory: C:\Workspaces
