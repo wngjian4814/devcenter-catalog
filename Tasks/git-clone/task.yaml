@@ -3,23 +3,22 @@
 name: git-clone
 description: Clones a git repository.
 author: Microsoft Corporation
-command: "./main.ps1 -RepositoryUrl {{repositoryUrl}} -Directory {{directory}} -Branch {{branch}} -Pat {{pat}}"
+command: ./main.ps1 -RepositoryUrl {{repositoryUrl}} -Directory {{directory}} -Branch {{branch}} -Pat {{pat}}
 inputs:
   repositoryUrl:
     defaultValue: ''
     type: string
     required: true
-    description: The URL of the repository to clone.
+    description:
   directory:
     defaultValue: C:\Workspaces
     type: string
     required: false
-    description: The directory under which the repository will be cloned. This is the equivalent of the working directory under which the git command will execute.
-  branch:
+    description: 
     defaultValue: ''
     type: string
     required: false
-    description: The branch to clone.
+    description: 
   pat:
     defaultValue: ''
     type: string
