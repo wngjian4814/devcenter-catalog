@@ -7,9 +7,6 @@ setupTasks:
     inputs:
       configurationFile: C:\WinGetConfig\system.yaml
       runAsUser: false
-  - task: choco
-    inputs:
-      package: vscode
   - task: git-clone
     description: Clone this repository into C:\Workspaces
     inputs:
