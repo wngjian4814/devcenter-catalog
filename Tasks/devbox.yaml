@@ -1,5 +1,5 @@
 name: wngjianCustom
-image: Visual Studio 2022 Enterprise on Windows 11 Enterprise + Microsoft 365 Apps 23H2
+image: microsoftwindowsdesktop_windows-ent-cpc_win11-23h2-ent-cpc-os
 hostInformation: general_i_32c128gb2048ssd_v2
 supportsHibernation: false
 setupTasks:
