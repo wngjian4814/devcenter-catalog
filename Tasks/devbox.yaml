@@ -8,6 +8,5 @@ setupTasks:
     inputs:
       repositoryUrl: https://github.com/OrchardCMS/OrchardCore.git
       directory: C:\Workspaces
-  - task: reboot
   - task: sysprep
       
