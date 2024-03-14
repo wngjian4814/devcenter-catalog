@@ -1,5 +1,5 @@
 name: wngjianCustom
-image: microsoftwindowsdesktop_windows-ent-cpc_win11-23h2-ent-cpc-os
+image: microsoftwindowsdesktop_windows-ent-cpc_win11-23h2-ent-cpc-m365
 hostInformation: general_i_32c128gb2048ssd_v2
 supportsHibernation: false
 setupTasks:
