@@ -1,8 +1,6 @@
-# This is a Chocolatey package installation task for Dev Box.
-
 $schema: 1.0
 name: reboot
-description: Run sysprep script.
+description: Run reboot script.
 author: Microsoft Corporation
 command: "./Reboot.ps1"
 documentation:
