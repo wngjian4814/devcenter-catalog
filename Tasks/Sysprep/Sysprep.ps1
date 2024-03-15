@@ -1,19 +1,37 @@
-# Commands to stop and disable the InstallService
 Write-Host -Message 'Stopping InstallService'
-Stop-Service InstallService
+$service = Get-Service -Name InstallService -ErrorAction SilentlyContinue
+if ($service -ne $null) {
+    Stop-Service -Name InstallService
+    Write-Host -Message 'InstallService stopped'
+} else {
+    Write-Host -Message 'InstallService is not running'
+}
+
 Write-Host -Message 'Setting InstallService Startup to Disabled'
 Set-Service -Name InstallService -StartupType Disabled
 
 # Commands to remove specified AppxPackages for all users
-Get-AppxPackage -AllUsers -Name "microsoft.Epmshellextension" | Remove-AppxPackage
-Get-AppxPackage -AllUsers -Name "PaloAltoNetworks.GlobalProtect" | Remove-AppxPackage
-Get-AppxPackage -AllUsers -Name "Microsoft.CompanyPortal" | Remove-AppxPackage
-Get-AppxPackage -AllUsers -Name "SpotifyAB.SpotifyMusic" | Remove-AppxPackage
-Get-AppxPackage -AllUsers -Name "MSTeams" | Remove-AppxPackage
-Get-AppxPackage -AllUsers -Name "Microsoft.EpmShellExtension" | Remove-AppxPackage
-Get-AppxPackage -AllUsers -Name "Microsoft.Winget.Source" | Remove-AppxPackage
+$packagesToRemove = @(
+    "microsoft.Epmshellextension",
+    "PaloAltoNetworks.GlobalProtect",
+    "Microsoft.CompanyPortal",
+    "SpotifyAB.SpotifyMusic",
+    "MSTeams",
+    "Microsoft.EpmShellExtension",
+    "Microsoft.Winget.Source"
+)
 
-$newProcess = new-object System.Diagnostics.ProcessStartInfo "sysprep.exe" 
+foreach ($package in $packagesToRemove) {
+    $appxPackage = Get-AppxPackage -AllUsers -Name $package -ErrorAction SilentlyContinue
+    if ($appxPackage -ne $null) {
+        Remove-AppxPackage -Package $appxPackage.PackageFullName -AllUsers
+        Write-Host -Message "Removed $package"
+    } else {
+        Write-Host -Message "$package not found"
+    }
+}
+
+$newProcess = New-Object System.Diagnostics.ProcessStartInfo "sysprep.exe" 
 $newProcess.WorkingDirectory = "${env:SystemDrive}\windows\system32\sysprep" 
 $newProcess.Arguments = "/generalize /oobe /shutdown" 
 Write-Host $newProcess.Arguments 
