@@ -1,0 +1,7 @@
+$schema: 1.0
+name: canarybuild
+description: Run canary build script.
+author: Microsoft Corporation
+command: "./CanaryBuild.ps1"
+documentation:
+  notes: This task is used to install canary build.
