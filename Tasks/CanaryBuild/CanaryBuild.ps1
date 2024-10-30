@@ -1,3 +1,12 @@
+# Set script execution policy (if not already set)
+Set-ExecutionPolicy RemoteSigned -Force
+
+# Ensure that the Windows Update module is available
+Install-Module -Name PSWindowsUpdate -Force -Scope CurrentUser
+
+# Import the module
+Import-Module PSWindowsUpdate
+
 # Check if Windows Insider settings are available on the VM
 $insiderKeyPath = "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Selection"
 if (-Not (Test-Path $insiderKeyPath)) {
