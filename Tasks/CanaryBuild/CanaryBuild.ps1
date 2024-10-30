@@ -1,6 +1,3 @@
-# Set script execution policy (if not already set)
-Set-ExecutionPolicy RemoteSigned -Force
-
 # Ensure that the Windows Update module is available
 Install-Module -Name PSWindowsUpdate -Force -Scope CurrentUser
 
@@ -25,4 +22,8 @@ Write-Output "Checking for updates in the Canary channel..."
 Get-WindowsUpdate -WindowsUpdate -AcceptAll -Install -Verbose
 
 Write-Output "The VM is now enrolled in the Windows Insider Program and will install updates from the Canary channel."
+
+
+
+
  
