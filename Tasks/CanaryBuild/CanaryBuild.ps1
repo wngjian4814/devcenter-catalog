@@ -1,27 +1,27 @@
-# Ensure that the Windows Update module is available
-Install-Module -Name PSWindowsUpdate -Force -Scope CurrentUser
+# Join the Windows Insider Program using PowerShell
+# This script should be run as Administrator
 
-# Import the module
-Import-Module PSWindowsUpdate
+# Define registry paths for Insider settings
+$InsiderPath = "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Selection"
+$ContentPath = "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\Applicability"
 
-# Check if Windows Insider settings are available on the VM
-$insiderKeyPath = "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Selection"
-if (-Not (Test-Path $insiderKeyPath)) {
-    Write-Output "Windows Insider settings not available. Ensure this VM is capable of joining the Insider Program."
-    exit 1
-}
+# Ensure paths exist
+if (!(Test-Path $InsiderPath)) { New-Item -Path $InsiderPath -Force | Out-Null }
+if (!(Test-Path $ContentPath)) { New-Item -Path $ContentPath -Force | Out-Null }
 
-# Set Windows Insider Channel to Canary
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Selection" -Name "UIBranch" -Value "Canary"
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\Applicability" -Name "BranchName" -Value "Canary"
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\Applicability" -Name "ContentType" -Value "Mainline"
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\Applicability" -Name "Ring" -Value "External"
+# Configure for Canary channel (adjust "UIRing" and "Ring" to other values for different channels)
+New-ItemProperty -Path $InsiderPath -Name "UIContentType" -Value "Mainline" -PropertyType String -Force | Out-Null
+New-ItemProperty -Path $InsiderPath -Name "UIRing" -Value "Canary" -PropertyType String -Force | Out-Null
+New-ItemProperty -Path $ContentPath -Name "BranchName" -Value "Canary" -PropertyType String -Force | Out-Null
+New-ItemProperty -Path $ContentPath -Name "ContentType" -Value "Mainline" -PropertyType String -Force | Out-Null
+New-ItemProperty -Path $ContentPath -Name "Ring" -Value "Canary" -PropertyType String -Force | Out-Null
 
-# Connect to Windows Update servers to check for Canary builds
-Write-Output "Checking for updates in the Canary channel..."
-Get-WindowsUpdate -WindowsUpdate -AcceptAll -Install -Verbose
+# Enable Telemetry to allow Insider settings to apply
+$TelemetryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
+if (!(Test-Path $TelemetryPath)) { New-Item -Path $TelemetryPath -Force | Out-Null }
+New-ItemProperty -Path $TelemetryPath -Name "AllowTelemetry" -Value 3 -PropertyType DWord -Force | Out-Null
 
-Write-Output "The VM is now enrolled in the Windows Insider Program and will install updates from the Canary channel."
+Write-Output "System configured to join the Windows Insider Program (Canary Channel). Please restart your system for the changes to take effect."
 
 
 
